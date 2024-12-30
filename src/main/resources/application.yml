@@ -1,0 +1,30 @@
+## DYNAMODB ENV ##
+DYNAMODB_REGION: eu-west-1
+DYNAMODB_ACCESS_KEY: noop
+DYNAMODB_SECRET_KEY: noop
+DYNAMODB_ENDPOINT: http://localhost:4566
+
+spring:
+  application:
+    name: spring-cloud-dynamodb-boilerplate
+  cloud:
+    aws:
+      # General AWS Configuration
+      region:
+        static: eu-west-1
+      # DynamoDB Configuration
+      dynamodb:
+        enabled: true
+        region: ${DYNAMODB_REGION:${spring.cloud.aws.region.static}}
+      # AWS Credentials Configuration (choose one approach)
+      credentials:
+        access-key: ${DYNAMODB_ACCESS_KEY:}
+        secret-key: ${DYNAMODB_SECRET_KEY:}
+      endpoint: ${DYNAMODB_ENDPOINT:}
+
+# Custom DynamoDB entity scanning configuration
+dynamodb:
+  entity:
+    ddl-enabled: false  # Set to true if you want tables to be dropped on shutdown
+    packages:
+      - com.boutouil.dynamodb.domain
