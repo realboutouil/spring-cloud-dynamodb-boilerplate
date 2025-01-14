@@ -9,13 +9,10 @@ spring:
     name: spring-cloud-dynamodb-boilerplate
   cloud:
     aws:
-      # General AWS Configuration
-      region:
-        static: eu-west-1
       # DynamoDB Configuration
       dynamodb:
         enabled: true
-        region: ${DYNAMODB_REGION:${spring.cloud.aws.region.static}}
+        region: ${DYNAMODB_REGION:}
       # AWS Credentials Configuration (choose one approach)
       credentials:
         access-key: ${DYNAMODB_ACCESS_KEY:}
